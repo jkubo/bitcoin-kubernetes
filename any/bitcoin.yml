@@ -1,11 +1,18 @@
-apiVersion: extensions/v1beta1
+### bitcoin.yml
+---
+apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: bitcoin
   name: bitcoin-core-deployment
   labels:
     app: bitcoin-core-app
     tier: bitcoin
 spec:
+  selector:
+    matchLabels:
+      app: bitcoin-core-app
+      tier: bitcoin
   replicas: 1
   template:
     metadata:
@@ -14,20 +21,21 @@ spec:
         tier: bitcoin
     spec:
       volumes:
-      - name: bitcoin-core-pv-storage
+      - name: bitcoin-core
         persistentVolumeClaim:
-          claimName: bitcoin-core-pv-claim
+          claimName: bitcoin-core
       containers:
       - name: bitcoin-core
         image: "ruimarinho/bitcoin-core:latest"
         imagePullPolicy: IfNotPresent
         volumeMounts:
-        - name: bitcoin-core-pv-storage
+        - name: bitcoin-core
           mountPath: "/home/bitcoin/.bitcoin"
 ---
 apiVersion: v1
 kind: Service
 metadata:
+  namespace: bitcoin
   name: bitcoin-core-service
   labels:
     tier: bitcoin

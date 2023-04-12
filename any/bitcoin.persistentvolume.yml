@@ -1,0 +1,30 @@
+## bitcoin.persistentvolumeclaim.yml
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: "bitcoin"
+  name: "bitcoin-core"
+spec:
+  storageClassName: slow
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 150Gi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: "bitcoin-core"
+  labels:
+    type: "local"
+spec:
+  storageClassName: "slow"
+  capacity:
+    storage: "150Gi"
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/ssd/bitcoin"
+---
