@@ -26,7 +26,7 @@ spec:
           claimName: bitcoin-core
       containers:
       - name: bitcoin-core
-        image: "ruimarinho/bitcoin-core:latest"
+        image: "jkubo/bitcoin-core:latest"
         imagePullPolicy: IfNotPresent
         volumeMounts:
         - name: bitcoin-core

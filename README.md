@@ -6,8 +6,8 @@ Configs for running BitCoin full node in Kubernetes
 Useful commands:
 
 Deployment
-- `kubectl create -f any/<FILE_NAME>.yml`
-- `kubectl delete -f any/<FILE_NAME>.yml`
+- `kubectl create -f manifests/<FILE_NAME>.yml`
+- `kubectl delete -f manifests/<FILE_NAME>.yml`
 
 General
 - `kubectl get all -n bitcoin`
